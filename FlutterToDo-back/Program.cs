@@ -1,27 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using TodoApi.Models;
-
+using FlutterToDo_back.models;
 
 
 var builder = WebApplication.CreateBuilder(args);
+var Configuration = builder.Configuration;
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<TodoContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddDbContext<TodoContext>(opt => opt.UseNpgsql("PostgreSQL 16"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-
-
-var Configuration = builder.Configuration;
-builder.Services.AddDbContext<TodoContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-
-
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -30,7 +22,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -38,6 +29,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-
-

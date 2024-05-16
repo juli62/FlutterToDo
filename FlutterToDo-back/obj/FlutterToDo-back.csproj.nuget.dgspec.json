@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Julian\\Desktop\\Ejercicios Alterna\\Portafolio\\Flutter\\FlutterToDo-main\\FlutterToDo-back\\TodoApi.csproj": {}
+    "C:\\Users\\Julian\\Desktop\\Ejercicios Alterna\\Portafolio\\Flutter\\FlutterToDo-main\\FlutterToDo-back\\FlutterToDo-back.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Julian\\Desktop\\Ejercicios Alterna\\Portafolio\\Flutter\\FlutterToDo-main\\FlutterToDo-back\\TodoApi.csproj": {
+    "C:\\Users\\Julian\\Desktop\\Ejercicios Alterna\\Portafolio\\Flutter\\FlutterToDo-main\\FlutterToDo-back\\FlutterToDo-back.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Julian\\Desktop\\Ejercicios Alterna\\Portafolio\\Flutter\\FlutterToDo-main\\FlutterToDo-back\\TodoApi.csproj",
-        "projectName": "TodoApi",
-        "projectPath": "C:\\Users\\Julian\\Desktop\\Ejercicios Alterna\\Portafolio\\Flutter\\FlutterToDo-main\\FlutterToDo-back\\TodoApi.csproj",
+        "projectUniqueName": "C:\\Users\\Julian\\Desktop\\Ejercicios Alterna\\Portafolio\\Flutter\\FlutterToDo-main\\FlutterToDo-back\\FlutterToDo-back.csproj",
+        "projectName": "FlutterToDo-back",
+        "projectPath": "C:\\Users\\Julian\\Desktop\\Ejercicios Alterna\\Portafolio\\Flutter\\FlutterToDo-main\\FlutterToDo-back\\FlutterToDo-back.csproj",
         "packagesPath": "C:\\Users\\Julian\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Julian\\Desktop\\Ejercicios Alterna\\Portafolio\\Flutter\\FlutterToDo-main\\FlutterToDo-back\\obj\\",
         "projectStyle": "PackageReference",
@@ -54,21 +54,21 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -76,7 +76,7 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
