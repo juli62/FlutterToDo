@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlutterToDo-back")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+920a3d987fc0fb98e1840d27f4056b1984952309")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4548e0aa85aaf4070127b77207fe09a7c94b828a")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlutterToDo-back")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlutterToDo-back")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

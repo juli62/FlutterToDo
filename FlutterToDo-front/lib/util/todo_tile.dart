@@ -1,4 +1,4 @@
-// ignore_for_file: sort_child_properties_last, must_be_immutable, prefer_const_constructors, use_super_parameters, prefer_const_literals_to_create_immutables
+// ignore_for_file: sort_child_properties_last, must_be_immutable, prefer_const_constructors, use_super_parameters, prefer_const_literals_to_create_immutables, empty_constructor_bodies
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -14,8 +14,8 @@ class TodoTile extends StatelessWidget {
       {Key? key,
       required this.taskName,
       required this.completed,
-      required this.onChanged,
-      required this.deleteFunction})
+      this.onChanged,
+      this.deleteFunction})
       : super(key: key);
 
   @override
@@ -72,4 +72,6 @@ class TodoTile extends StatelessWidget {
       ),
     );
   }
+
+  static jsonDecode(String body) {}
 }
