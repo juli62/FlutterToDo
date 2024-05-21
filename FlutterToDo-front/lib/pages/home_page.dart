@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -24,37 +25,102 @@ class _HomePageState extends State<HomePage> {
   // Task List
   List toDoList = [];
   List<FetchedTile> things = [];
+
   //Fetch tasks
 
   Future<http.Response> fetchTasks() async {
+    setState(() {
+      toDoList.clear();
+    });
     final res = await http.get(Uri.parse("http://10.0.2.2:5214/api/TodoItems"));
     print('the response is... ${res.body}');
+
+    //List to pass into Map/List
     List<dynamic> jsonList = jsonDecode(res.body);
     things = jsonList
         .map((jsonItem) =>
             FetchedTile.fromJson(jsonItem as Map<String, dynamic>))
         .toList();
-
+    //This for loop goes through every item in the map and adds them to the list to be displayed
     for (var el in things) {
-      print('Name: ${el.name} , Status: ${el.isComplete}');
-      if (!toDoList.contains(el.name)) {
+      print('ID: ${el.id}, Name: ${el.name} , Status: ${el.isComplete}');
+      if (!toDoList.any((item) => item[0] == el.name)) {
         setState(() {
-          toDoList.add([el.name, el.isComplete]);
+          toDoList.add([el.name, el.isComplete, el.id]);
         });
       }
     }
 
     print('The map is...${toDoList}');
 
-    //print(toDoList);
     return res;
+  }
+
+//Updating a task's completed status
+
+  Future<FetchedTile> updateStatus(int id, String name, bool isComplete) async {
+    final update = await http.put(
+      Uri.parse('http://10.0.2.2:5214/api/TodoItems/${id}'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'id': id,
+        'name': name,
+        'isComplete': isComplete,
+      }),
+    );
+
+    if (update.statusCode == 200) {
+      return FetchedTile.fromJson(
+          jsonDecode(update.body) as Map<String, dynamic>);
+    } else {
+      throw Exception('Failed to update task...');
+    }
+  }
+
+  // Create Tasks
+
+  Future<FetchedTile> createTask(String name, isComplete) async {
+    final create = await http.post(
+      Uri.parse("http://10.0.2.2:5214/api/TodoItems"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'name': name,
+        'isComplete': isComplete,
+      }),
+    );
+    if (create.statusCode == 200 && !toDoList.any((item) => item[0] == name)) {
+      return FetchedTile.fromJson(
+          jsonDecode(create.body) as Map<String, dynamic>);
+    } else {
+      throw Exception('Failed to create task...');
+    }
+  }
+
+//Delete Tasks
+
+  Future<http.Response> removeTask(int id) async {
+    final delete = await http.delete(
+      Uri.parse('http://10.0.2.2:5214/api/TodoItems/${id}'),
+      headers: <String, String>{
+        'Content-Type': 'application.json; charset=UTF-8'
+      },
+    );
+
+    return delete;
   }
 
   //Chackbox tapped
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       toDoList[index][1] = !toDoList[index][1];
+      updateStatus(toDoList[index][2], toDoList[index][0], toDoList[index][1]);
     });
+    print('Tasks ID: ${toDoList[index][2]}');
+    print('Tasks Status: ${toDoList[index][1]}');
   }
 
 //Save Task
@@ -62,7 +128,9 @@ class _HomePageState extends State<HomePage> {
   void saveNewTask() {
     setState(() {
       toDoList.add([_controller.text, false]);
+      createTask(_controller.text, false);
       _controller.clear();
+      fetchTasks();
     });
     Navigator.of(context).pop();
   }
@@ -86,6 +154,7 @@ class _HomePageState extends State<HomePage> {
   void deleteTask(int index) {
     setState(() {
       toDoList.removeAt(index);
+      removeTask(index);
     });
   }
 
